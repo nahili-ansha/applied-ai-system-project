@@ -1,16 +1,5 @@
-import os
-
-from dotenv import load_dotenv
-
-load_dotenv()
-
 import streamlit as st
-
-from ai_recommender import generate_task_suggestions, retrieve_care_guidelines
-from logger_config import setup_logging
-from pawpal_system import Owner, Pet, Scheduler, Task
-
-setup_logging()
+from pawpal_system import Owner, Pet, Task, Scheduler
 
 st.set_page_config(page_title="PawPal+", page_icon="🐾", layout="centered")
 st.title("🐾 PawPal+")
@@ -25,15 +14,6 @@ if "current_pet" not in st.session_state:
 if "scheduler" not in st.session_state:
     st.session_state.scheduler = None
 
-if "suggestions" not in st.session_state:
-    st.session_state.suggestions = []
-
-if "suggestions_pet" not in st.session_state:
-    st.session_state.suggestions_pet = ""
-
-if "suggestions_used_ai" not in st.session_state:
-    st.session_state.suggestions_used_ai = False
-
 # ── Section 1: Owner setup ─────────────────────────────────────────────────────
 st.header("1. Owner Info")
 
@@ -43,11 +23,9 @@ with st.form("owner_form"):
     submitted = st.form_submit_button("Save owner")
 
 if submitted:
-    st.session_state.owner           = Owner(name=owner_name, available_minutes=available_minutes)
-    st.session_state.current_pet     = None
-    st.session_state.scheduler       = None
-    st.session_state.suggestions     = []
-    st.session_state.suggestions_pet = ""
+    st.session_state.owner     = Owner(name=owner_name, available_minutes=available_minutes)
+    st.session_state.current_pet = None
+    st.session_state.scheduler   = None
     st.success(f"Owner '{owner_name}' saved — {available_minutes} min available today.")
 
 owner: Owner = st.session_state.owner
@@ -92,11 +70,6 @@ else:
     selected_name = st.selectbox("Select pet to add task to", pet_names)
     selected_pet  = next(p for p in owner.pets if p.name == selected_name)
 
-    # Clear stale suggestions when the user switches pets
-    if st.session_state.suggestions_pet != selected_name:
-        st.session_state.suggestions     = []
-        st.session_state.suggestions_pet = ""
-
     with st.form("task_form"):
         task_title     = st.text_input("Task title", value="Morning walk")
         duration       = st.number_input("Duration (minutes)", min_value=1, max_value=240, value=20)
@@ -118,48 +91,7 @@ else:
         selected_pet.add_task(new_task)
         st.success(f"Task '{task_title}' added to {selected_pet.name}.")
 
-    # ── AI Suggestions (RAG) ───────────────────────────────────────────────────
-    st.subheader("AI Task Suggestions")
-
-    has_key = bool(os.getenv("ANTHROPIC_API_KEY"))
-    if not has_key:
-        st.caption(
-            "No API key detected — suggestions will use the built-in care guidelines. "
-            "Add ANTHROPIC_API_KEY to a .env file for Claude-powered recommendations."
-        )
-
-    if st.button(f"Get suggestions for {selected_pet.name}"):
-        with st.spinner("Retrieving care guidelines and generating suggestions…"):
-            guidelines = retrieve_care_guidelines(selected_pet)
-            suggestions, used_ai = generate_task_suggestions(selected_pet, guidelines)
-            st.session_state.suggestions         = suggestions
-            st.session_state.suggestions_pet     = selected_name
-            st.session_state.suggestions_used_ai = used_ai
-
-    if st.session_state.suggestions and st.session_state.suggestions_pet == selected_name:
-        source = "Claude AI (RAG)" if st.session_state.suggestions_used_ai else "Built-in care guidelines"
-        st.caption(f"Source: {source}")
-
-        to_remove = []
-        for i, task in enumerate(st.session_state.suggestions):
-            col_info, col_btn = st.columns([5, 1])
-            with col_info:
-                recur_label = f" · {task.recurrence}" if task.recurrence else ""
-                time_label  = f" · {task.scheduled_time}" if task.scheduled_time else ""
-                st.write(
-                    f"**{task.title}** — {task.duration_minutes} min, "
-                    f"{task.priority} priority, {task.task_type}{recur_label}{time_label}"
-                )
-            with col_btn:
-                if st.button("Add", key=f"add_suggestion_{i}"):
-                    selected_pet.add_task(task)
-                    to_remove.append(i)
-                    st.success(f"Added '{task.title}'")
-
-        for idx in reversed(to_remove):
-            st.session_state.suggestions.pop(idx)
-
-    # ── Task list ──────────────────────────────────────────────────────────────
+    # Show tasks sorted by scheduled time using the new method
     if selected_pet.tasks:
         st.write(f"**Tasks for {selected_pet.name} — sorted by time:**")
         sorted_tasks = selected_pet.get_tasks_sorted_by_time()
@@ -177,6 +109,7 @@ else:
         ]
         st.table(task_rows)
 
+        # Pending vs completed summary
         n_pending   = len(selected_pet.get_pending_tasks())
         n_completed = len(selected_pet.get_completed_tasks())
         col1, col2 = st.columns(2)
@@ -196,6 +129,7 @@ if st.button("Generate schedule"):
 if st.session_state.scheduler:
     scheduler: Scheduler = st.session_state.scheduler
 
+    # ── Conflict warnings — shown before the plan so the owner sees them first ──
     conflicts = scheduler.detect_conflicts()
     if conflicts:
         st.warning(
@@ -212,17 +146,18 @@ if st.session_state.scheduler:
 
     st.divider()
 
+    # ── Scheduled tasks table ──────────────────────────────────────────────────
     plan = scheduler._plan
     if plan:
         st.write("**Scheduled tasks:**")
         plan_rows = [
             {
-                "#":        i + 1,
-                "Task":     t.title,
-                "Duration": f"{t.duration_minutes} min",
-                "Priority": t.priority.capitalize(),
-                "Type":     t.task_type,
-                "Time":     t.scheduled_time or "—",
+                "#":          i + 1,
+                "Task":       t.title,
+                "Duration":   f"{t.duration_minutes} min",
+                "Priority":   t.priority.capitalize(),
+                "Type":       t.task_type,
+                "Time":       t.scheduled_time or "—",
             }
             for i, t in enumerate(plan)
         ]
@@ -230,12 +165,14 @@ if st.session_state.scheduler:
     else:
         st.info("No tasks fit within the available time budget.")
 
+    # ── Skipped tasks ──────────────────────────────────────────────────────────
     skipped = scheduler._skipped
     if skipped:
         st.warning(f"**{len(skipped)} task(s) skipped** — not enough time remaining:")
         for task in skipped:
             st.write(f"- {task.title} ({task.duration_minutes} min, {task.priority} priority)")
 
+    # ── Time budget summary ────────────────────────────────────────────────────
     time_used      = owner.available_minutes - scheduler._remaining_minutes
     time_remaining = scheduler._remaining_minutes
     col1, col2, col3 = st.columns(3)
