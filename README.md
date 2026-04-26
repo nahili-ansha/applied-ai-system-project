@@ -101,7 +101,7 @@ python -m pytest tests/ -v
 
 ## Sample Interactions
 
-### Example 1 — AI Suggestions for an Adult Dog
+### Example 1: AI Suggestions for an Adult Dog
 
 The owner sets their profile to 90 available minutes and adds a pet named Milo (dog, age 4). They click "Get AI Suggestions."
 
@@ -122,7 +122,7 @@ The scheduler fits all four tasks (80 min total) within the 90-minute budget and
 
 ---
 
-### Example 2 — Schedule Generation with a Conflict Warning
+### Example 2: Schedule Generation with a Conflict Warning
 
 The owner manually adds two tasks at the same time slot "Evening Meds" at 18:00 and "Grooming Brush" also at 18:00 and generates the plan.
 
@@ -140,7 +140,7 @@ The plan still runs, but the owner is warned to resolve the overlap manually.
 
 ---
 
-### Example 3 — Knowledge Base Fallback (No API Key)
+### Example 3: Knowledge Base Fallback (No API Key)
 
 If `ANTHROPIC_API_KEY` is not set, the app uses the knowledge base directly. For a senior cat (age 12), the fallback generates:
 
@@ -216,6 +216,6 @@ The biggest thing this project taught me about AI is that it separates two jobs 
 
 The RAG architecture taught me something different: retrieval and generation are complementary rather than interchangeable. Asking Claude to generate pet care tasks from scratch produces output that sounds confident but varies across runs and cannot be verified against a known source. Grounding the prompt in a curated knowledge base first produces output that is consistent, explainable, and can degrade gracefully to the knowledge base alone when the API is unavailable. Building a fallback path forced me to think about the knowledge base as a first-class component rather than just a prompt-stuffing trick.
 
-The scheduling algorithm taught me to think about user mental models before algorithm elegance. A greedy priority-first scheduler is not optimal in the mathematical sense, but it is optimal for this user: someone who wants "feed and walk my dog before anything else, and stop when I run out of time." An optimal knapsack solution might sometimes schedule a cluster of low-priority tasks instead of one high-priority task, and a user would rightly find that confusing. Matching the algorithm to the user's mental model is a design decision as important as any technical trade-off.
+The scheduling algorithm taught me to think about user mental models before algorithm elegance. A greedy priority-first scheduler is not optimal in the mathematical sense, but it is optimal for this user: someone who wants "feed and walk my dog before anything else, and stop when I run out of time." An optimal knapsack solution might sometimes schedule a cluster of low-priority tasks instead of one high priority task, and a user would rightly find that confusing. Matching the algorithm to the user's mental model is a design decision as important as any technical trade-off.
 
 For a future employer: this project demonstrates end-to-end applied AI system design from knowledge base construction and RAG implementation to prompt caching, fallback design, and behavioral test coverage. The code is clean, the architecture has clear boundaries, and the decisions were made deliberately with documented reasoning.
