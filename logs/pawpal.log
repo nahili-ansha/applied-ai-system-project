@@ -1,0 +1,63 @@
+2026-04-24 21:22:04  INFO      Retrieved 5 guidelines for species=cat, age_group=adult
+2026-04-24 21:22:04  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:22:04  INFO      KB fallback produced 5 tasks
+2026-04-24 21:27:00  INFO      Retrieved 6 guidelines for species=cat, age_group=senior
+2026-04-24 21:27:00  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:27:00  INFO      KB fallback produced 5 tasks
+2026-04-24 21:39:23  INFO      Retrieved 6 guidelines for species=dog, age_group=puppy
+2026-04-24 21:39:23  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:39:23  INFO      KB fallback produced 5 tasks
+2026-04-24 21:40:35  INFO      Retrieved 6 guidelines for species=dog, age_group=senior
+2026-04-24 21:40:35  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:40:35  INFO      KB fallback produced 5 tasks
+2026-04-24 21:42:09  INFO      Retrieved 6 guidelines for species=dog, age_group=senior
+2026-04-24 21:42:09  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:42:09  INFO      KB fallback produced 5 tasks
+2026-04-24 21:54:19  INFO      Retrieved 5 guidelines for species=cat, age_group=adult
+2026-04-24 21:54:19  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:54:19  INFO      KB fallback produced 5 tasks
+2026-04-24 21:55:54  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-24 21:55:54  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 21:55:54  INFO      KB fallback produced 5 tasks
+2026-04-24 22:04:46  INFO      Retrieved 5 guidelines for species=cat, age_group=adult
+2026-04-24 22:04:46  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 22:04:46  INFO      KB fallback produced 5 tasks
+2026-04-24 22:05:30  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-24 22:05:30  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 22:05:30  INFO      KB fallback produced 5 tasks
+2026-04-24 22:11:51  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-24 22:11:51  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 22:11:51  INFO      KB fallback produced 5 tasks
+2026-04-24 22:12:02  INFO      Retrieved 5 guidelines for species=cat, age_group=adult
+2026-04-24 22:12:02  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 22:12:02  INFO      KB fallback produced 5 tasks
+2026-04-24 22:20:36  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-24 22:20:36  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 22:20:36  INFO      KB fallback produced 5 tasks
+2026-04-24 22:20:48  INFO      Retrieved 5 guidelines for species=cat, age_group=adult
+2026-04-24 22:20:48  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-24 22:20:48  INFO      KB fallback produced 5 tasks
+2026-04-26 10:29:32  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-26 10:29:32  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:29:32  INFO      KB fallback produced 5 tasks
+2026-04-26 10:30:11  INFO      Retrieved 6 guidelines for species=dog, age_group=senior
+2026-04-26 10:30:11  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:30:11  INFO      KB fallback produced 5 tasks
+2026-04-26 10:35:16  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-26 10:35:16  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:35:16  INFO      KB fallback produced 5 tasks
+2026-04-26 10:35:36  INFO      Retrieved 6 guidelines for species=dog, age_group=senior
+2026-04-26 10:35:36  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:35:36  INFO      KB fallback produced 5 tasks
+2026-04-26 10:43:35  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-26 10:43:35  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:43:35  INFO      KB fallback produced 5 tasks
+2026-04-26 10:43:47  INFO      Retrieved 6 guidelines for species=dog, age_group=senior
+2026-04-26 10:43:47  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:43:47  INFO      KB fallback produced 5 tasks
+2026-04-26 10:48:02  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-26 10:48:02  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:48:02  INFO      KB fallback produced 5 tasks
+2026-04-26 10:48:15  INFO      Retrieved 6 guidelines for species=dog, age_group=adult
+2026-04-26 10:48:15  WARNING   ANTHROPIC_API_KEY not set — skipping AI, using KB fallback
+2026-04-26 10:48:15  INFO      KB fallback produced 5 tasks
