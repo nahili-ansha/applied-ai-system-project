@@ -2,6 +2,8 @@
 
 PawPal+ is a Streamlit web application that helps busy pet owners organize daily care for their pets. It combines a priority based scheduling engine with a Claude powered AI recommender to generate personalized task plans grounded in species-specific care guidelines.
 
+![PawPal+ app demo](pawpal+final.gif)
+
 ---
 
 ## Original Project (Modules 1–3)
@@ -29,6 +31,8 @@ The **AI Integration layer** (`ai_recommender.py`) retrieves care guidelines fro
 The **Core Business Logic layer** (`pawpal_system.py`) contains the `Task`, `Pet`, `Owner`, and `Scheduler` classes. The scheduler uses a greedy algorithm: tasks are sorted by priority (high → medium → low) and added to the plan one by one until the time budget runs out. Tasks that do not fit are placed in a skipped list with an explanation.
 
 The **Knowledge Base** (`pet_care_kb.json`) is a structured JSON file containing care guidelines organized by species and life stage (puppy/adult/senior for dogs, kitten/adult/senior for cats). It serves as the retrieval source for the RAG pattern so that AI suggestions are always grounded in domain knowledge rather than generated from scratch.
+
+![Pet Care AI system diagram](Pet%20Care%20AI.png)
 
 ```
 Streamlit UI (app.py)
