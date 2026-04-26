@@ -1,4 +1,4 @@
-# PawPal+ — AI-Powered Pet Care Scheduler
+# PawPal+ is an AI-Powered Pet Care Scheduler
 
 PawPal+ is a Streamlit web application that helps busy pet owners organize daily care for their pets. It combines a priority based scheduling engine with a Claude powered AI recommender to generate personalized task plans grounded in species-specific care guidelines.
 
